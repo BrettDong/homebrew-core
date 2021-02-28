@@ -5,6 +5,7 @@ class Nethack < Formula
   homepage "https://www.nethack.org/"
   url "https://www.nethack.org/download/3.6.6/nethack-366-src.tgz"
   version "3.6.6"
+  revision 1
   sha256 "cfde0c3ab6dd7c22ae82e1e5a59ab80152304eb23fb06e3129439271e5643ed2"
   license "NGPL"
   head "https://github.com/NetHack/NetHack.git"
@@ -32,7 +33,7 @@ class Nethack < Formula
     ENV.deparallelize
 
     # Fixes https://github.com/NetHack/NetHack/issues/274
-    ENV.O0
+    ENV.O0 if Hardware::CPU.intel?
 
     cd "sys/unix" do
       hintfile = if MacOS.version >= :mojave
